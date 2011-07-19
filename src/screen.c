@@ -122,6 +122,7 @@ screen_get_with_geo(int x, int y)
 void
 screen_set_sel(int screen)
 {
+	Client *c;
      if(screen < 0 || screen > screen_count() - 1)
           screen = 0;
 
@@ -134,6 +135,12 @@ screen_set_sel(int screen)
                   sgeo[screen].y + sgeo[screen].height / 2);
 
      selscreen = screen;
+
+	 for(c = clients; c; c = c->next)
+		 if(c->tag == (uint)seltag[selscreen] && c->screen == selscreen)
+		 	break;
+
+	 client_focus(c);
 
      return;
 }
