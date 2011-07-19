@@ -792,7 +792,8 @@ client_set_rules(Client *c)
      if(!applied_screen_rule && conf.client.default_open_screen > -1
           && conf.client.default_open_screen < screen_count())
      {
-          c->screen = conf.client.default_open_screen;
+          //c->screen = conf.client.default_open_screen;
+          c->screen = selscreen;
 
           client_focus_next(c);
           tags[c->screen][c->tag].request_update = True;
